@@ -1,23 +1,62 @@
-<style>
-  body {
-    background: black;
-  }
-  p{
-    color:white;
-  }
-</style>
-<canvas></canvas>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Game Title</title>
+  <style>
+    body {
+      background: black;
+      color:white;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    li:hover {
+      color: lightgray;
+    }
+  </style>
+</head>
+<body>
+  <canvas></canvas>
+  <div id="question-container">
+    <p id="question-text"></p>
+    <ul id="answers-list">
+      <!-- Dynamically generated list items will be added here -->
+    </ul>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js" integrity="sha512-Mf/xUqfWvDIr+1B6zfnIDIiG7XHzyP/guXUWgV6PgaQoIFeXkJQR5XWh9fqAiCiRCpemabt3naV4jhDWVnuYDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/data/collisions.js"></script>
+  <script src="js/classes/CollisionBlock.js"></script>
+  <script src="js/classes/Sprite.js"></script>
+  <script src="js/classes/Player.js"></script>
+  <script src="js/eventListeners.js"></script>
+  <script src="index.js"></script>
+    <script>
+    const corAnswers = ["4", "4", "16",]
+    createQuestion();
+    // Function to handle answer clicks
+    function handleAnswerClick(answer, listItem) {
+      console.log("Clicked answer:", answer);
+      if (answer === corAnswers[3-level]) { 
+        console.log("Correct answer!");
+        // Remove the whole question
+        document.getElementById("answers-list").innerHTML = " ";
+        document.getElementById('question-text').innerHTML = "<p>You got it right!</p>";
+        dinosaur = null;
 
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"
-  integrity="sha512-Mf/xUqfWvDIr+1B6zfnIDIiG7XHzyP/guXUWgV6PgaQoIFeXkJQR5XWh9fqAiCiRCpemabt3naV4jhDWVnuYDQ=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-></script>
-<script src="js/utils.js"></script>
-<script src="js/data/collisions.js"></script>
-<script src="js/classes/CollisionBlock.js"></script>
-<script src="js/classes/Sprite.js"></script>
-<script src="js/classes/Player.js"></script>
-<script src="js/eventListeners.js"></script>
-<script src="index.js"></script>
+      } else {
+        console.log("Wrong answer!");
+        // Remove the clicked list item from the DOM
+        listItem.remove();
+      }
+    }
+  </script>
+</body>
+</html>

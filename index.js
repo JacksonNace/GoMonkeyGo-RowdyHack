@@ -9,6 +9,35 @@ let collisionBlocks
 let background
 let doors
 let dinosaur
+
+function createQuestion () {
+  // JavaScript code to dynamically add answers to the question and handle clicks
+  const questionTextElement = document.getElementById('question-text');
+  const answersListElement = document.getElementById('answers-list');
+
+  const questions = ["What is 2 + 2?", "If 2y + 7 = 15, what is the value of y?", "What is the value of 2(a+3) when a = 5?"] // 1 3 2
+  // Set the question text
+  questionTextElement.textContent = questions[3-level];
+
+  // Array of answers
+  const answers = [["1", "2", "3", "4"],
+  ["4", "6", "8", "9"],
+  ["10", "11", "12", "16"],
+  ];
+
+  
+  answersListElement.innerHTML = '';
+  // Loop through answers and create list items
+  answers[3-level].forEach(answer => {
+    const listItem = document.createElement('li');
+    listItem.textContent = answer;
+    listItem.addEventListener('click', () => {
+      handleAnswerClick(answer, listItem);
+    });
+    answersListElement.appendChild(listItem);
+  });
+}
+
 const player = new Player({
   imageSrc: './img/king/idle.png',
   frameRate: 11,
@@ -53,6 +82,7 @@ const player = new Player({
             levels[level].init()
             player.switchSprite('idleRight')
             player.preventInput = false
+            createQuestion();
             gsap.to(overlay, {
               opacity: 0,
             })
@@ -221,8 +251,9 @@ function animate() {
   doors.forEach((door) => {
     door.draw()
   })
-
-  dinosaur.draw()
+  if (dinosaur != null) {
+    dinosaur.draw()
+  }
 
   player.handleInput(keys)
   player.draw()
