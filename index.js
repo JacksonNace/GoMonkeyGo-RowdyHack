@@ -8,6 +8,7 @@ let parsedCollisions
 let collisionBlocks
 let background
 let doors
+let dinosaur
 const player = new Player({
   imageSrc: './img/king/idle.png',
   frameRate: 11,
@@ -92,6 +93,14 @@ let levels = {
           autoplay: false,
         }),
       ]
+      
+      dinosaur = new Sprite({
+        position: {
+          x: 400,
+          y: 290,
+        },
+        imageSrc: './img/trex.png',
+      })
     },
   },
   2: {
@@ -112,6 +121,8 @@ let levels = {
         imageSrc: './img/backgroundLevel2.png',
       })
 
+      
+
       doors = [
         new Sprite({
           position: {
@@ -125,6 +136,21 @@ let levels = {
           autoplay: false,
         }),
       ]
+
+      dinosaur = new Sprite({
+        position: {
+          x: 500,
+          y: 420,
+        },
+        imageSrc: './img/trice.png',
+      })
+      background = new Sprite({
+        position: {
+          x: 0,
+          y: 0,
+        },
+        imageSrc: './img/backgroundLevel2.png',
+      })
     },
   },
   3: {
@@ -157,6 +183,13 @@ let levels = {
           autoplay: false,
         }),
       ]
+      dinosaur = new Sprite({
+        position: {
+          x: 450,
+          y: 370,
+        },
+        imageSrc: './img/yellow.png',
+      })
     },
   },
 }
@@ -188,6 +221,8 @@ function animate() {
   doors.forEach((door) => {
     door.draw()
   })
+
+  dinosaur.draw()
 
   player.handleInput(keys)
   player.draw()
